@@ -1,0 +1,503 @@
+﻿/**
+ * @file index.css
+ * @description Swiss Brutalist Agromet Design System tokens and global styles
+ * @module frontend/styles
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Coffee & Sand / Forest Paper Palette */
+  --c-bg: #0f0d0e;
+  --c-surface: #181416;
+  --c-surface-elevated: #221c1f;
+  --c-surface-hover: #2d2429;
+  
+  --c-border: #382c32;
+  --c-border-strong: #59434e;
+  --c-border-accent: #873e4b;
+  
+  --c-espresso: #42141a;
+  --c-wine: #782635;
+  --c-wine-glow: rgba(120, 38, 53, 0.35);
+  
+  --c-sand: #dbc4ac;
+  --c-sand-light: #ede0d4;
+  --c-linen: #faf5ee;
+  
+  --c-gold: #d4913b;
+  --c-gold-dim: #8c5a1a;
+  --c-gold-glow: rgba(212, 145, 59, 0.2);
+  
+  --c-sage: #4f8069;
+  --c-sage-glow: rgba(79, 128, 105, 0.25);
+  --c-amber: #e06c38;
+  --c-crimson: #c83b4b;
+  --c-cyan: #3fa7b8;
+  
+  --c-text-primary: #faf5ee;
+  --c-text-secondary: #c7b8ad;
+  --c-text-muted: #8c7d74;
+  --c-text-inverse: #0f0d0e;
+
+  /* Fibonacci Spacing */
+  --f-1: 1px;
+  --f-2: 2px;
+  --f-3: 3px;
+  --f-5: 5px;
+  --f-8: 8px;
+  --f-13: 13px;
+  --f-21: 21px;
+  --f-34: 34px;
+  --f-55: 55px;
+  --f-89: 89px;
+
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+  
+  /* Geometry: Pure Swiss Square */
+  --radius: 0px;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --c-bg: #f5efe6;
+  --c-surface: #ffffff;
+  --c-surface-elevated: #faf6f0;
+  --c-surface-hover: #ede4d8;
+  
+  --c-border: #dfd2c4;
+  --c-border-strong: #c2b09e;
+  --c-border-accent: #782635;
+  
+  --c-espresso: #42141a;
+  --c-wine: #631d2a;
+  --c-wine-glow: rgba(99, 29, 42, 0.15);
+  
+  --c-sand: #8c6d4f;
+  --c-sand-light: #5c432d;
+  --c-linen: #2b231d;
+  
+  --c-gold: #b36e1b;
+  --c-gold-dim: #7a480d;
+  --c-gold-glow: rgba(179, 110, 27, 0.15);
+  
+  --c-sage: #2e664f;
+  --c-sage-glow: rgba(46, 102, 79, 0.15);
+  --c-amber: #c2501a;
+  --c-crimson: #a82433;
+  --c-cyan: #1b7a8c;
+  
+  --c-text-primary: #211915;
+  --c-text-secondary: #5e4f45;
+  --c-text-muted: #8a7a6e;
+  --c-text-inverse: #faf5ee;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 !important;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Monospace Utilities */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Swiss Grid Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--c-bg);
+}
+
+/* Top Navbar */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--f-13) var(--f-34);
+  background-color: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--f-13);
+}
+
+.brand-logo-box {
+  background-color: var(--c-wine);
+  color: #ffffff;
+  padding: var(--f-5) var(--f-8);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--c-border-accent);
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  gap: var(--f-2);
+  background: var(--c-bg);
+  padding: var(--f-2);
+  border: 1px solid var(--c-border);
+}
+
+.nav-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--c-text-secondary);
+  padding: var(--f-8) var(--f-21);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--f-8);
+  transition: all 0.15s ease;
+}
+
+.nav-tab-btn:hover {
+  color: var(--c-text-primary);
+  background: var(--c-surface-hover);
+}
+
+.nav-tab-btn.active {
+  background: var(--c-wine);
+  color: #ffffff;
+  box-shadow: inset 0 -2px 0 var(--c-gold);
+}
+
+/* Status Pill */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--f-8);
+  padding: var(--f-5) var(--f-13);
+  background: var(--c-surface-elevated);
+  border: 1px solid var(--c-border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--c-sage);
+  display: inline-block;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Layout Grid */
+.main-content {
+  flex: 1;
+  padding: var(--f-21) var(--f-34);
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Swiss Brutalist Panel */
+.panel {
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  padding: var(--f-21);
+  margin-bottom: var(--f-21);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--f-13);
+  margin-bottom: var(--f-21);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--f-8);
+  letter-spacing: -0.01em;
+}
+
+.panel-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--f-2) var(--f-8);
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-muted);
+}
+
+/* Form Controls */
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--f-5);
+  margin-bottom: var(--f-13);
+}
+
+.control-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.input-text, .select-box, .textarea-box {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: var(--f-8) var(--f-13);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.input-text:focus, .select-box:focus, .textarea-box:focus {
+  border-color: var(--c-gold);
+}
+
+/* Action Buttons */
+.btn-primary {
+  background-color: var(--c-wine);
+  color: #ffffff;
+  border: 1px solid var(--c-border-accent);
+  padding: var(--f-8) var(--f-21);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--f-8);
+  transition: all 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #8c2e3f;
+  box-shadow: 0 0 12px var(--c-wine-glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--c-surface-elevated);
+  color: var(--c-text-primary);
+  border: 1px solid var(--c-border);
+  padding: var(--f-8) var(--f-13);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--f-5);
+  transition: all 0.15s;
+}
+
+.btn-secondary:hover {
+  background: var(--c-surface-hover);
+  border-color: var(--c-border-strong);
+}
+
+/* Live Telemetry / Index Pill */
+.index-card {
+  background: var(--c-surface-elevated);
+  border: 1px solid var(--c-border);
+  padding: var(--f-13);
+  display: flex;
+  flex-direction: column;
+  gap: var(--f-5);
+  position: relative;
+  overflow: hidden;
+}
+
+.index-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background-color: var(--c-border-strong);
+}
+
+.index-card.safe::before { background-color: var(--c-sage); }
+.index-card.warning::before { background-color: var(--c-gold); }
+.index-card.critical::before { background-color: var(--c-crimson); }
+
+.index-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+}
+
+.index-value {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--c-text-primary);
+}
+
+.index-subtext {
+  font-size: 11px;
+  color: var(--c-text-secondary);
+}
+
+/* Time Scrubber Slider */
+.scrubber-track {
+  width: 100%;
+  height: 8px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  margin: var(--f-13) 0;
+}
+
+.scrubber-track::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 24px;
+  background: var(--c-gold);
+  border: 1px solid #ffffff;
+  cursor: ew-resize;
+}
+
+.scrubber-track::-moz-range-thumb {
+  width: 18px;
+  height: 24px;
+  background: var(--c-gold);
+  border: 1px solid #ffffff;
+  cursor: ew-resize;
+}
+
+/* Execution Trace Step */
+.trace-step {
+  display: flex;
+  gap: var(--f-13);
+  padding: var(--f-13);
+  background: var(--c-surface-elevated);
+  border: 1px solid var(--c-border);
+  margin-bottom: var(--f-8);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.trace-step-number {
+  color: var(--c-gold);
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 20px;
+}
+
+.trace-tool-badge {
+  background: var(--c-espresso);
+  color: var(--c-sand);
+  border: 1px solid var(--c-border-accent);
+  padding: 1px var(--f-5);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Badges */
+.badge-urgent {
+  background-color: var(--c-crimson);
+  color: #ffffff;
+  padding: var(--f-2) var(--f-8);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-advisory {
+  background-color: var(--c-gold);
+  color: #111;
+  padding: var(--f-2) var(--f-8);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-safe {
+  background-color: var(--c-sage);
+  color: #ffffff;
+  padding: var(--f-2) var(--f-8);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--c-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-border-strong);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-border-accent);
+}
