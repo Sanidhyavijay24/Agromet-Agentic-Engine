@@ -7,7 +7,7 @@
 - **Flagship Deployment Strategy:**
   - **Zone XIV (Western Dry / Rajasthan):** Flagship in-memory 1km downscaling engine (~165MB footprint) active locally for fast responses without runtime model downloading latency.
   - **Remaining 14 ICAR ACZ Models:** Hosted on the **Kaggle Model Hub** with full spatial routing contracts, ensuring lean server footprint and sub-second container startup.
-  - **Zero Monolithic Bloat:** Discarded obsolete non-core modules (Crop Doctor CNN, Mandi prices terminal, bulky 3D WebGL meshes) to deliver an agile, deployable solution.
+  - **Clean Codebase:** Cleaned all legacy hackathon audit scripts, test dumps, and unused endpoints.
 
 ---
 
@@ -62,7 +62,9 @@ agromet-agentic-engine/
 │       │   └── ZoneFleetHub.tsx    # 15 ACZ Pan-India Directory & Kaggle Hub
 │       └── App.tsx                 # Root layout & view controller
 ├── data/
-│   └── processed/                  # Panchayat terrain metadata & DEM rasters
+│   ├── processed/                  # Panchayat terrain metadata & DEM rasters
+│   └── raw/                        # 15 ACZ 10-year training parquets & DEM rasters
+├── scripts/                        # Ingestion, training, and benchmarking utilities
 ├── tests/                          # 72 passing backend tests (pytest) + 2 frontend tests (bun test)
 ├── Dockerfile                      # Production container (<350MB)
 ├── docker-compose.yml              # 1-command deployment
@@ -72,50 +74,19 @@ agromet-agentic-engine/
 
 ---
 
-## 4. Feature Status Checklist
+## 4. Test Verification Summary
 
-- [x] **Project Isolation:** Complete standalone project established at `C:\Codes\agromet-agentic-engine` with independent git/deps, leaving legacy repository untouched.
-- [x] **Phase 1: Agentic AI Core & Specialized Tools (100% Completed & Verified):**
-  - [x] Strict Pydantic v2 schemas (`MicroclimateIndices`, `AgrometActionPlan`, `AgentTrace`).
-  - [x] 1km Downscaler Tool with elevation lapse rate and regolith thermal inertia lag.
-  - [x] Agromet Indices Tool with Tetens VPD equation, GDD, Delta-T spray safety, and nocturnal surface inversion detection.
-  - [x] ICAR Agronomy Tool covering Bajra, Guar, Groundnut, Wheat, Mustard, Cotton.
-  - [x] Soil & Terrain Tool leveraging USGS 30m SRTM DEM and 0-7cm moisture profiles.
-  - [x] Google Gemini Flash ReAct Orchestrator with multi-turn reasoning and bilingual Hindi translation.
-- [x] **Phase 2: FastAPI Gateway & Endpoints (100% Completed & Verified):**
-  - [x] `POST /api/v1/agent/advisory` (Full autonomous consultation loop).
-  - [x] `POST /api/v1/agent/chat` (Multi-turn conversational agromet advisory).
-  - [x] `GET /api/v1/agent/tools` (Registered tools schema catalog).
-  - [x] `GET /api/v1/forecast/zones/catalog` (15 ACZ directory & Kaggle links).
-  - [x] `GET /api/v1/forecast/point` (1km microclimate point inference).
-  - [x] 72/72 Pytest unit & integration tests passing (`python -m pytest tests/ -v`).
-- [x] **Phase 3: Pure Bun + React 19 Frontend (100% Completed & Verified):**
-  - [x] Swiss Brutalist Coffee & Sand design system tokens (`--c-espresso: #42141a`, `--c-sand: #dbc4ac`, `--c-wine: #782635`, Fibonacci spacing, `border-radius: 0px`).
-  - [x] 1km² Microclimate Spatial Lens with interactive 24-hour Diurnal Cycle Scrubber.
-  - [x] ReAct Tool Execution Trace Visualizer with real-time step badge logs.
-  - [x] Actionable Agromet Advisory Card with dual English / Hindi toggle.
-  - [x] 15 ACZ Pan-India Fleet Hub with Kaggle Model Hub links.
-  - [x] `bun test` test suite passing (2/2 tests in 31ms).
-- [x] **Phase 4: Docker Containerization & Deployment Setup (100% Completed):**
-  - [x] Lightweight multi-stage `Dockerfile` with Python 3.11 + Bun runtime.
-  - [x] `docker-compose.yml` configured for 1-command startup.
-  - [x] Clean `.dockerignore` for minimal image size.
+- **Backend Test Suite:** `72 passed, 0 failed` (`python -m pytest tests/ -v`, execution time: ~29s).
+- **Frontend Test Suite:** `2 passed, 0 failed` (`bun test`, execution time: ~33ms).
+- **Frontend Bundle Performance:** Bundled in 52ms via native Bun bundler (`index.js`: 490KB minified, `index.css`: 7.9KB).
 
 ---
 
-## 5. Test Verification Summary
-
-- **Backend Test Suite:** `72 passed, 0 failed` (`python -m pytest tests/ -v`, execution time: ~30s).
-- **Frontend Test Suite:** `2 passed, 0 failed` (`bun test`, execution time: ~31ms).
-- **Frontend Bundle Performance:** Bundled in 51ms via native Bun bundler (`index.js`: 490KB minified, `index.css`: 7.9KB).
-
----
-
-## 6. Deployment Guide
+## 5. Deployment Guide
 
 ```bash
 # 1. Local Development (Backend)
-uvicorn services.api.main:app --reload --port 8000
+python -m uvicorn services.api.main:app --reload --port 8000
 
 # 2. Local Development (Frontend)
 cd frontend
