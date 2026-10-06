@@ -1,0 +1,18 @@
+{
+  "panchayat_id": "CHAKSU_001",
+  "timestamp": "2024-07-15T14:00:00Z",
+  "target_variable": "temperature_2m_c",
+  "baseline_value": 34.5,
+  "downscaled_value": 36.66,
+  "confidence_score": 0.928,
+  "covariates_used": {
+    "elevation_m": 431.0,
+    "delta_elevation_m": 57.138888888888914,
+    "predicted_residual_c": 2.163,
+    "solar_radiation_w_m2": 720.0,
+    "soil_temperature_0_to_7cm_c": 34.5,
+    "soil_moisture_0_to_7cm_m3m3": 0.22,
+    "et0_evapotranspiration_mm": 0.65,
+    "thermal_inertia_lag_3h": 0.0
+  }
+}
