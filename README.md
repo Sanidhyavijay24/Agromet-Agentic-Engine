@@ -17,7 +17,7 @@ The **Agromet Agentic Engine (A²E)** bridges the spatial resolution gap between
 
 A²E resolves this challenge through a two-stage hybrid architecture:
 
-1. **Physics-Guided 28-Feature Gradient Boosted Downscaler**: Ingests baseline forecast grids, 30m USGS SRTM digital elevation rasters, solar Global Horizontal Irradiance (GHI), and regolith thermal inertia lag to compute spatial residuals ($R = T_{\text{local}} - T_{\text{baseline\_LOO}}$), achieving a **+58.9% macro RMSE error reduction** across India's 15 Agro-Climatic Zones (ACZs).
+1. **Physics-Guided 28-Feature Gradient Boosted Downscaler**: Ingests baseline forecast grids, 30m USGS SRTM digital elevation rasters, solar Global Horizontal Irradiance (GHI), and regolith thermal inertia lag to compute spatial residuals (`R = T_local - T_baseline_LOO`), achieving a **+58.9% macro RMSE error reduction** across India's 15 Agro-Climatic Zones (ACZs).
 2. **Autonomous ReAct Agromet Agent**: Powered by **Google Gemini Flash** with specialized physical tools (`DownscalerTool`, `AgrometIndicesTool`, `AgronomyTool`, `SoilTerrainTool`), performing multi-step reasoning, psychrometric stress analysis (VPD, GDD, Delta-T), and synthesizing actionable, bilingual (English / Hindi) agronomic directives.
 
 ---
@@ -65,13 +65,13 @@ A²E resolves this challenge through a two-stage hybrid architecture:
 
 ### 1. Physics-Guided 1 km² Downscaling
 - **Spatial Block Partitioning**: Strict Leave-One-Panchayat-Out cross-validation ensuring spatial generalization without coordinate leakage.
-- **Topographic Correction**: Real-time continuous sampling of USGS SRTM 30m rasters for elevation lapse rate ($\Gamma = 0.0065^\circ\text{C}/\text{m}$), topographic shelter indices, and aspect solar incidence angles.
+- **Topographic Correction**: Real-time continuous sampling of USGS SRTM 30m rasters for elevation lapse rate (`Γ = 0.0065 °C/m`), topographic shelter indices, and aspect solar incidence angles.
 - **Regolith Thermal Lag**: Incorporates 3-hour lag-convolved surface temperature memory to model diurnal arid hysteresis in desert and black-cotton vertisol regions.
 
 ### 2. Psychrometric Agromet Indices Engine
-- **Vapor Pressure Deficit (VPD)**: Accurate computation using the Tetens formulation ($e_s = 0.61078 \exp\left(\frac{17.27 T}{T + 237.3}\right)$) to detect stomatal closure risks ($> 2.5\text{ kPa}$).
-- **Delta-T Spray Windows**: Computes wet-bulb depression to identify hazardous volatilization windows ($\Delta T > 8^\circ\text{C}$) and inversion drift risks ($\Delta T < 2^\circ\text{C}$).
-- **Surface Inversion Trapping**: Detects nocturnal radiation inversions in low-lying valley dunes ($T_{\text{local}} - T_{\text{baseline}} < -0.4^\circ\text{C}$) under calm conditions ($< 4\text{ km/h}$).
+- **Vapor Pressure Deficit (VPD)**: Accurate computation using the Tetens formulation (`e_s = 0.61078 * exp((17.27 * T) / (T + 237.3))`) to detect stomatal closure risks (`> 2.5 kPa`).
+- **Delta-T Spray Windows**: Computes wet-bulb depression to identify hazardous volatilization windows (`ΔT > 8°C`) and inversion drift risks (`ΔT < 2°C`).
+- **Surface Inversion Trapping**: Detects nocturnal radiation inversions in low-lying valley dunes (`T_local - T_baseline < -0.4°C`) under calm wind conditions (`< 4 km/h`).
 
 ### 3. Autonomous ReAct Agent Loop
 - **Multi-Tool Tool Calling**: Gemini Flash autonomously orchestrates queries across physical downscaling, agronomic registries, and soil telemetry before synthesizing verdicts.
