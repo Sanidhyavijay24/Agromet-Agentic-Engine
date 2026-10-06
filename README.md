@@ -3,6 +3,8 @@
 [![Kaggle Dataset & Models](https://img.shields.io/badge/Kaggle-Pan--India_15_ACZ_Models-20BEFF?logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+![Agromet Agentic Engine System Architecture](assets/a2e_system_banner.jpg)
+
 A physics-guided microclimate downscaling framework and agromet advisory agent for Indian agriculture. It takes coarse weather forecasts (~25 km resolution from Open-Meteo / ERA5-Land) and downscales them to ~1 km resolution using 30m USGS SRTM terrain features and gradient boosting. A ReAct agent (Gemini Flash) then uses the downscaled weather alongside agronomic rules to generate farm-level advice for irrigation, frost risk, and pesticide spray windows.
 
 ---
@@ -57,14 +59,17 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-### 2. Download Model Artifacts & DEM Tiles
-The Zone XIV model (`residual_model_acz_14.joblib`, 195 MB) and 30m SRTM DEM tiles are hosted on Kaggle:
+### 2. Download Model Artifacts
+The Zone XIV model (`residual_model_acz_14.joblib`, 195 MB) and full fleet are hosted on Kaggle:
 ```bash
-# Automated download script (uses kagglehub or kaggle CLI)
+# Download only Zone XIV model needed for running (195 MB)
 python scripts/fetch_artifacts.py
 
-# Or download manually via Kaggle CLI
-kaggle datasets download -d sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models
+# Optional: Download all 15 zone models and full dataset (3.5 GB)
+python scripts/fetch_artifacts.py --all
+
+# Or single-file CLI download
+kaggle datasets download -d sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models -f residual_model_acz_14.joblib -p services/ml_downscaler/artifacts/zones/
 ```
 
 ### 3. Run Tests
