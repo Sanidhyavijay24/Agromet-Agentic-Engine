@@ -3,32 +3,20 @@
 ## 1. Overview & Objective
 - **Experiment ID:** `EXP-06`
 - **Model Architecture:** LightGBM Regressor (`n_estimators=1200`, `best_iteration=1200`, `num_leaves=63`, `learning_rate=0.03`).
-- **Objective:** Evaluate leaf-wise histogram tree growth against XGBoost depth-wise tree growth, analyzing training throughput, memory footprint, and test generalization on 21 physics-guided features.
-- **Validation Scheme:** Spatial Block Holdout Split (8 unseen test points, 70,272 hourly samples across all 2024).
+- **Objective:** Benchmark leaf-wise gradient boosting against depth-wise XGBoost for residual temperature downscaling.
 
 ---
 
-## 2. Quantitative Benchmark Results
+## 2. Benchmark Results
 
-| Model Architecture | Train Time (s) | Inf Latency (ms) | Test MAE (°C) | Test RMSE (°C) | Test $R^2$ | RMSE Drop (Δ%) | MAE Drop (Δ%) |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Coarse Baseline** | — | — | 0.523°C | 0.726°C | 0.9923 | 0.0% | 0.0% |
-| **LightGBM (Leaf-wise GBDT)** | 4.11s | 0.0066ms | 0.323°C | 0.451°C | 0.9970 | **+37.8%** | **+38.2%** |
-| **🏆 Champion (Exp 02 Deepened XGBoost)** | **8.03s (GPU)** | **0.003ms** | **0.311°C** | **0.439°C** | **0.9972** | **+39.5%** | **+40.4%** |
-
----
-
-## 3. Top Feature Importances (Split Gain)
-- **delta_elevation_m**: 19.37%
-- **relative_humidity_2m_pct**: 9.01%
-- **doy_sin**: 8.75%
-- **baseline_temp_c**: 8.53%
-- **theoretical_lapse_delta_c**: 6.65%
-- **doy_cos**: 6.44%
+| Model | Test RMSE | Test MAE | Test R² | Error Reduction vs Baseline | Training Time |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Coarse NWP Baseline** | 0.696 °C | 0.493 °C | 0.9930 | 0.0% | - |
+| **LightGBM (Leaf-wise)** | 0.444 °C | 0.315 °C | 0.9967 | **+36.2%** | 18.7s (CPU) |
+| **Deepened XGBoost (Exp 02)** | **0.439 °C** | **0.311 °C** | **0.9968** | **+39.5%** | **14.2s (GPU)** |
 
 ---
 
-## 4. Key Takeaways
-1. **Histogram Efficiency:** LightGBM trains rapidly with histogram binning and leaf-wise splitting, converging at **1200 iterations**.
-2. **Predictive Performance:** LightGBM achieves **+37.8% RMSE error reduction**, performing neck-and-neck with XGBoost.
-3. **Inference Latency:** Ultra-low inference latency of **0.0066 ms/sample**, making it an optimal candidate for high-throughput batch downscaling.
+## 3. Analysis
+- **High Performance:** LightGBM achieves solid accuracy (+36.2% error reduction) and fast leaf splitting.
+- **Border Stability:** On sharp spatial holdout boundaries, XGBoost's exact histogram binning with L1/L2 regularization (`reg_alpha=0.1`, `reg_lambda=1.0`) yielded slightly tighter residual bounds.

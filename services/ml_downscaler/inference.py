@@ -1,4 +1,4 @@
-"""
+﻿"""
 @file inference.py
 @description Hyperlocal microclimate downscaling inference engine emitting verified Pydantic payloads.
 @module services/ml_downscaler
@@ -78,7 +78,7 @@ from services.ml_downscaler.zone_router import (
     route_coordinates_to_zone,
 )
 
-DEFAULT_MODEL_PATH: Path = Path(__file__).resolve().parent / "artifacts" / "residual_model.joblib"
+DEFAULT_MODEL_PATH: Path = Path(__file__).resolve().parent / "artifacts" / "zones" / "residual_model_acz_14.joblib"
 _ZONE_MODEL_CACHE: dict[str, dict[str, Any]] = {}
 
 
@@ -103,7 +103,7 @@ def load_downscaler_model(
         path = get_zone_artifact_path(zone_id)
         if not path.exists():
             path = DEFAULT_MODEL_PATH
-        cache_key = f"zone_{zone_id}"
+        cache_key = str(path.resolve())
     else:
         path = DEFAULT_MODEL_PATH
         cache_key = "default"
@@ -326,7 +326,7 @@ def downscale_point_forecast(
     # Predict residual anomaly R
     pred_residual = float(model.predict(X)[0])
 
-    # Physical meteorological guardrails: clamp anomaly to [-12°C, +12°C]
+    # Physical meteorological guardrails: clamp anomaly to [-12Â°C, +12Â°C]
     clamped_residual = max(-12.0, min(12.0, pred_residual))
 
     baseline_val = float(baseline_point.temperature_2m_c or 28.0)
@@ -551,3 +551,5 @@ def downscale_forecast_batch(
         forecasts=forecasts,
         generated_at=datetime.now(timezone.utc),
     )
+
+

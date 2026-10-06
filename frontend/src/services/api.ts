@@ -176,7 +176,7 @@ export function getFallbackZoneCatalog(): ZoneCatalogItem[] {
       model_size_mb: 165.4,
       rmse_reduction_percent: 62.4,
       r2_score: 0.952,
-      kaggle_hub_url: "https://www.kaggle.com/datasets/agromet/pan-india-downscaler-fleet",
+      kaggle_hub_url: "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models",
       description: "Thar desert arid ecosystem, extreme diurnal swing (30°C range), sand dune topographic lapse, high radiative cooling.",
     },
     {
@@ -196,7 +196,7 @@ export function getFallbackZoneCatalog(): ZoneCatalogItem[] {
       model_size_mb: 172.1,
       rmse_reduction_percent: 58.1,
       r2_score: 0.944,
-      kaggle_hub_url: "https://www.kaggle.com/datasets/agromet/pan-india-downscaler-fleet/zone_6",
+      kaggle_hub_url: "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models",
       description: "Intensive irrigated wheat-rice belt, dense winter radiation fog (smog) dynamics, nocturnal boundary inversion.",
     },
     {
@@ -216,7 +216,7 @@ export function getFallbackZoneCatalog(): ZoneCatalogItem[] {
       model_size_mb: 181.0,
       rmse_reduction_percent: 59.7,
       r2_score: 0.938,
-      kaggle_hub_url: "https://www.kaggle.com/datasets/agromet/pan-india-downscaler-fleet/zone_8",
+      kaggle_hub_url: "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models",
       description: "Vindhya/Satpura ridge topography, black cotton vertisols, thermal inertia lag from basalt bedrock.",
     },
     {
@@ -236,7 +236,7 @@ export function getFallbackZoneCatalog(): ZoneCatalogItem[] {
       model_size_mb: 195.2,
       rmse_reduction_percent: 68.3,
       r2_score: 0.961,
-      kaggle_hub_url: "https://www.kaggle.com/datasets/agromet/pan-india-downscaler-fleet/zone_1",
+      kaggle_hub_url: "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models",
       description: "Steep elevation lapse rate (0.65°C/100m), katabatic valley drainage winds, high aspect solar shading.",
     },
     {
@@ -256,7 +256,7 @@ export function getFallbackZoneCatalog(): ZoneCatalogItem[] {
       model_size_mb: 178.6,
       rmse_reduction_percent: 55.4,
       r2_score: 0.931,
-      kaggle_hub_url: "https://www.kaggle.com/datasets/agromet/pan-india-downscaler-fleet/zone_10",
+      kaggle_hub_url: "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models",
       description: "Deccan plateau semi-arid rain-shadow, red alfisol soil moisture dynamics, moderate elevation.",
     },
     {
@@ -276,8 +276,9 @@ export function getFallbackZoneCatalog(): ZoneCatalogItem[] {
       model_size_mb: 169.8,
       rmse_reduction_percent: 57.2,
       r2_score: 0.935,
-      kaggle_hub_url: "https://www.kaggle.com/datasets/agromet/pan-india-downscaler-fleet/zone_13",
+      kaggle_hub_url: "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models",
       description: "Coastal-interior gradient, Rann of Kutch saline albedo, marine boundary layer thermal damping.",
     }
   ];
 }
+

@@ -34,7 +34,7 @@ from services.ml_downscaler.zone_router import (
 
 router = APIRouter(prefix="/forecast", tags=["1km Microclimate Downscaling"])
 
-KAGGLE_MODEL_HUB_URL = "https://www.kaggle.com/datasets/sanidhyavijay/pan-india-15-acz-microclimate-fleet"
+KAGGLE_MODEL_HUB_URL = "https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models"
 
 
 def compute_thermal_inertia_lag(hourly_points: list, current_point: Any = None) -> Union[float, List[float]]:
@@ -219,4 +219,5 @@ async def get_panchayat_mosdac(panchayat_id: str):
             "data": data_dict
         }
     )
+
 

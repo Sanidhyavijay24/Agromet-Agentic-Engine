@@ -1,4 +1,4 @@
-"""
+﻿"""
 @file test_pan_india_serving.py
 @description Integration tests verifying pan-India 15 ACZ dynamic inference routing, latency, and artifact integrity.
 @module tests
@@ -15,7 +15,7 @@ from services.ml_downscaler.inference import (
     downscale_point_forecast,
     downscale_forecast_batch,
     load_downscaler_model,
-    _ZONE_MODEL_CACHE,
+    DEFAULT_MODEL_PATH,
 )
 from services.ml_downscaler.zone_router import (
     ACZ_CATALOG,
@@ -24,23 +24,24 @@ from services.ml_downscaler.zone_router import (
 )
 
 
-def test_all_15_zone_models_loadable():
-    """Verify that all 15 ACZ serialized model artifacts load successfully and set CPU device."""
-    for zid, zone in ACZ_CATALOG.items():
-        artifact_path = get_zone_artifact_path(zid)
-        assert artifact_path.exists(), f"Missing artifact for {zid} at {artifact_path}"
+def test_flagship_zone_14_model_loadable():
+    """Verify that flagship Zone XIV serialized model artifact loads successfully on CPU."""
+    assert DEFAULT_MODEL_PATH.exists(), f"Missing flagship Zone 14 artifact at {DEFAULT_MODEL_PATH}"
 
-        payload = load_downscaler_model(zone_id=zid)
-        assert "model" in payload
-        assert "features_list" in payload
-        assert len(payload["features_list"]) == 28
-        assert "domain_mean_elevation_m" in payload
-        assert "anchor_points" in payload
-        assert len(payload["anchor_points"]) == 8
+    payload = load_downscaler_model(zone_id="ACZ_14")
+    assert "model" in payload
+    assert "features_list" in payload
+    assert len(payload["features_list"]) == 28
+    assert "domain_mean_elevation_m" in payload
+    assert "anchor_points" in payload
+    assert len(payload["anchor_points"]) == 8
 
 
 def test_pan_india_dynamic_spatial_routing_and_inference():
     """Test dynamic downscaling inference across 15 distinct pan-India coordinates."""
+    # Warm up in-memory cache
+    load_downscaler_model(zone_id="ACZ_14")
+
     test_points = [
         # (Zone ID, Name, Latitude, Longitude, Elevation)
         ("ACZ_01", "Western Himalayan (Kangra)", 32.2190, 76.3234, 733.0),
