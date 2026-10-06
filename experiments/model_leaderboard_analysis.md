@@ -23,7 +23,7 @@
 | **EXP-12** | Production Inference Gap Audit | Champion Model (Exp 09) | 28 | 0.462 °C | 0.334 °C | 0.9962 | +36.4% | Quantified live NWP forecast proxy behavior vs offline truth. |
 | **EXP-13** | Quality & Metrics Audit | Methodological Review | - | - | - | - | - | Established strict baseline definitions and zero-leakage standards. |
 | **EXP-14** | Converged 30m SRTM Retraining | XGBoost (5555 trees, d=8) | 28 | **0.446 °C** | **0.319 °C** | **0.9967** | **+40.2%** | **Flagship Zone XIV Champion:** 30m SRTM DEM, 5,555 trees. |
-| **EXP-15** | Pan-India 15 ACZ Fleet | 15x XGBoost Models | 28 | **0.953 °C** | **0.653 °C** | **0.9745** | **+58.9%** | **Pan-India Fleet:** 47.3M rows, 15 agro-climatic zones. |
+| **EXP-15** | Pan-India 15 ACZ Fleet | 15x XGBoost Models | 28 | **0.912 °C** | **0.633 °C** | **0.9699** | **+60.6%** | **Pan-India Fleet:** 47.3M rows, 15 agro-climatic zones. |
 
 ---
 

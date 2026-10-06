@@ -26,7 +26,7 @@
 | **ACZ 13** | Gujarat Plains and Hills Region | Saurashtra, Kutch, Gujarat Alluvial | 2.210 °C | **0.982 °C** | 0.681 °C | 0.9645 | **+55.6%** | 2,950 | Verified |
 | **ACZ 14** | Western Dry Region | Western Rajasthan, Thar Desert | 0.746 °C | **0.446 °C** | 0.319 °C | 0.9967 | **+40.2%** | 5,555 | Verified |
 | **ACZ 15** | The Islands Region | Andaman & Nicobar, Lakshadweep | 2.820 °C | **1.198 °C** | 0.825 °C | 0.9560 | **+57.5%** | 3,100 | Verified |
-| **Fleet Average** | **Pan-India Macro Average** | **15 Agro-Climatic Zones** | **2.772 °C** | **0.953 °C** | **0.653 °C** | **0.9745** | **+58.9%** | **3,220** | **Operational** |
+| **Fleet Average** | **Pan-India Macro Average (Simple Mean)** | **15 Agro-Climatic Zones** | **2.758 °C** | **0.912 °C** | **0.633 °C** | **0.9699** | **+60.6%** | **3,220** | **Operational** |
 
 ---
 
@@ -40,3 +40,18 @@
 3. **Arid Zone XIV (Western Dry / Rajasthan):**
    - Extremely precise local baseline (0.746 °C).
    - Achieves a verified **+40.2% error reduction** down to **0.446 °C RMSE** and **0.319 °C MAE**, with exceptionally high explained variance ($R^2 = 0.9967$).
+
+---
+
+## 3. Aggregation Methodology & Data Provenance
+
+- **Definition of Fleet Average:** Simple unweighted mean computed across all 15 individual zone models:
+  - **Mean Baseline RMSE:** `2.758 °C`
+  - **Mean Downscaled ML RMSE:** `0.912 °C`
+  - **Mean Test MAE:** `0.633 °C`
+  - **Mean Test R²:** `0.9699`
+  - **Mean of Per-Zone Error Drops:** **+60.6%**
+  - **Pooled Aggregate Error Drop:** `(2.758 - 0.912) / 2.758 = +66.9%`
+- **Artifact Traceability:**
+  - **Zone XIV (Rajasthan):** Packaged and verified directly inside the repository at `services/ml_downscaler/artifacts/zones/residual_model_acz_14.joblib` (195 MB, 5,555 trees).
+  - **Zones 01–13 & 15:** Packaged and hosted in the Kaggle dataset bundle ([Pan-India 15 ACZ 1km Microclimate Dataset & Models](https://www.kaggle.com/datasets/sanidhyavijay24/pan-india-15-acz-1km-microclimate-dataset-and-models)).

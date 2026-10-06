@@ -84,9 +84,9 @@ agromet-agentic-engine/
   - **Verified Error Drop:** **+40.2% RMSE Reduction** (MAE `0.319 °C`, $R^2 = 0.9967$)
   - Model: 5,555 trees on authentic 30m USGS SRTM DEM with zero target leakage.
 - **Pan-India 15 ACZ Macro Average:**
-  - Raw Baseline RMSE: `2.772 °C`
-  - ML Downscaled RMSE: `0.953 °C`
-  - **Macro Average Error Drop:** **+58.9% RMSE Reduction** (MAE `0.653 °C`, Mean $R^2 = 0.9745$)
+  - Raw Baseline RMSE: `2.758 °C`
+  - ML Downscaled RMSE: `0.912 °C`
+  - **Macro Average Error Drop:** **+60.6% Mean RMSE Reduction** (MAE `0.633 °C`, Mean $R^2 = 0.9699$, Pooled Drop: 66.9%)
   - Spans 47.3 million hourly rows across 10 years (2015–2024). High-relief mountain zones achieve >70–87% error drop, while plains and arid zones achieve ~40–56%.
 
 ---

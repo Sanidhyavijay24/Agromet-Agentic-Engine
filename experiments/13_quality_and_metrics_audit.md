@@ -29,10 +29,10 @@
 | Environment / Zone | Baseline RMSE | ML Model RMSE | Verified RMSE Drop | Validated Status |
 | :--- | :---: | :---: | :---: | :--- |
 | **Zone XIV (Rajasthan / Western Dry)** | 0.746 °C | 0.446 °C | **+40.2%** | Verified on 30m SRTM DEM (Exp 14) |
-| **Pan-India 15 ACZ Macro Average** | 2.772 °C | 0.953 °C | **+58.9%** | Verified across 47.3M rows (Exp 15) |
+| **Pan-India 15 ACZ Macro Average** | 2.758 °C | 0.912 °C | **+60.6%** | Verified across 47.3M rows (Exp 15) |
 
 ---
 
 ## 4. Audit Verdict
 - All data leakage vectors are completely eliminated.
-- The dual-metric representation (+40.2% Zone XIV / +58.9% Pan-India Macro) reflects genuine physical terrain dynamics and rigorous empirical integrity.
+- The dual-metric representation (+40.2% Zone XIV / +60.6% Pan-India Macro) reflects genuine physical terrain dynamics and rigorous empirical integrity.
