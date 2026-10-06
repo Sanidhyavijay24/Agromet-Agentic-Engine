@@ -1,62 +1,43 @@
-# ─────────────────────────────────────────────────────────────────────────────
-#  SIH 26074 — Python Requirements
-#  Install: pip install -r requirements.txt
-#  Or with Conda: pip install -r requirements.txt (inside active conda env)
-# ─────────────────────────────────────────────────────────────────────────────
+# Agromet Agentic Engine (A²E) — Python Dependencies
+# Install: pip install -r requirements.txt
 
-# ── API Framework ─────────────────────────────────────────────────────────────
+# API Framework
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
 python-multipart>=0.0.9
 
-# ── Computer Vision & Deep Learning (Crop Doctor) ─────────────────────────────
-pillow>=10.0.0
-torch>=2.0.0
-torchvision>=0.15.0
-onnxruntime>=1.17.0
-
-# ── Data Validation & Settings ────────────────────────────────────────────────
+# Data Validation & Settings
 pydantic>=2.7.0
 pydantic-settings>=2.2.0
 
-# ── HTTP Clients & Scraping ───────────────────────────────────────────────────
+# HTTP Clients & Ingestion
 requests>=2.31.0
 httpx>=0.27.0
 beautifulsoup4>=4.12.0
-lxml>=5.2.0               # Fast HTML/XML parser backend for BeautifulSoup4
-pdfplumber>=0.11.0
-urllib3>=2.2.0
 
-# ── Numerical & Data Science ──────────────────────────────────────────────────
+# Numerical, ML & Data
 numpy>=1.26.0
 pandas>=2.2.0
 pyarrow>=15.0.0
-scipy>=1.13.0
 scikit-learn>=1.4.0
 xgboost>=2.0.0
 lightgbm>=4.3.0
 catboost>=1.2.0
+joblib>=1.3.0
 
-# ── Geospatial ────────────────────────────────────────────────────────────────
+# Geospatial Raster I/O
 rasterio>=1.3.9
-geopandas>=0.14.3
-shapely>=2.0.3
-xarray>=2024.1.0          # N-dimensional arrays for ERA5-Land NetCDF slicing
-netcdf4>=1.6.5            # NetCDF I/O engine required by xarray
-cdsapi>=0.7.0             # Copernicus CDS API client for ERA5-Land downloads
 
-# ── Utilities ─────────────────────────────────────────────────────────────────
-python-dotenv>=1.0.1
-loguru>=0.7.2
-PyYAML>=6.0               # Advisory rulebook (services/advisory_engine/rulebooks/*.yaml)
-tenacity>=8.3.0          # Retry logic with exponential back-off
-tabulate>=0.9.0           # Pretty-print tables in CLI scripts
-
-# ── LLM Integration (OpenRouter / OpenAI-compatible API) ──────────────────────
+# LLM & Agentic Reasoning
+google-genai>=0.1.0
 openai>=1.20.0
 
+# Utilities
+python-dotenv>=1.0.1
+loguru>=0.7.2
+tenacity>=8.3.0
+tabulate>=0.9.0
 
-# ── Development & Testing ─────────────────────────────────────────────────────
+# Development & Testing
 pytest>=8.2.0
 pytest-asyncio>=0.23.0
-httpx>=0.27.0             # Also used as AsyncClient for FastAPI test client

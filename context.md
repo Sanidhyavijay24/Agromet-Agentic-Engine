@@ -27,9 +27,9 @@
 ```
 agromet-agentic-engine/
 ├── services/
-│   ├── agent/                      # Autonomous ReAct advisory engine & specialized tools
+│   ├── agent/                      # Autonomous ReAct advisory engine & tools
 │   │   ├── core.py                 # Multi-step ReAct agent orchestrator (Gemini Flash)
-│   │   ├── schemas.py              # Strict Pydantic v2 schemas (AgrometActionPlan, AgentTrace)
+│   │   ├── schemas.py              # Pydantic v2 schemas (AgrometActionPlan, AgentTrace)
 │   │   └── tools/                  # Specialized tool suite
 │   │       ├── downscaler_tool.py  # 1km microclimate temperature & RH downscaling
 │   │       ├── indices_tool.py     # Physical indices (VPD, GDD, Spray Windows, Inversions)
@@ -37,15 +37,41 @@ agromet-agentic-engine/
 │   │       └── soil_tool.py        # 30m DEM elevation + 0-7cm soil moisture context
 │   ├── ml_downscaler/              # 28-feature physics engine & Zone XIV model
 │   │   ├── artifacts/zones/        # residual_model_acz_14.joblib (195MB)
+│   │   ├── dataset.py              # Feature extraction & LOO baseline pipeline
+│   │   ├── dem_source.py           # 30m USGS SRTM raster reader & terrain math
 │   │   ├── inference.py            # Low-latency inference handler & in-memory cache
-│   │   └── features.py             # 28-feature physics pipeline
-│   ├── ingestion/                  # Open-Meteo, USGS SRTM DEM, and satellite telemetry clients
+│   │   ├── train.py                # XGBoost training pipeline with early stopping
+│   │   └── zone_router.py          # 15 ACZ spatial router & catalog
+│   ├── ingestion/                  # Open-Meteo, Bhoonidhi, MOSDAC, and USGS DEM clients
+│   │   ├── open_meteo_client.py
+│   │   ├── bhoonidhi_client.py
+│   │   ├── mosdac_client.py
+│   │   ├── imd_public_client.py
+│   │   └── usgs_dem_client.py
+│   ├── llm_extractor/              # LLM bulletin extraction & self-correction
 │   └── api/                        # FastAPI REST API endpoints
-├── frontend/                       # Bun + React + TS dashboard
+│       ├── main.py
+│       ├── schemas.py
+│       ├── panchayat_registry.py
+│       └── routes/
+│           ├── agent.py
+│           ├── forecast.py
+│           └── health.py
+├── frontend/                       # Bun + React 19 + TypeScript dashboard
+│   ├── server.ts                   # Bun HTTP static server & API proxy
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   │   ├── index.css
+│   │   ├── components/
+│   │   └── services/api.ts
+│   └── public/index.html
 ├── data/
-│   └── raw/dem/                    # 30m USGS SRTM .hgt elevation rasters
-├── experiments/                    # 16 complete empirical experiment reports (01 to 15)
-└── tests/                          # Comprehensive pytest & bun test suites
+│   ├── raw/dem/                    # 30m USGS SRTM .hgt elevation rasters
+│   └── processed/                  # Metadata & sample forecasts
+├── experiments/                    # 16 empirical experiment reports (01 to 15 + leaderboard)
+├── scripts/                        # Dataset ingestion & benchmark scripts
+└── tests/                          # Automated pytest test suite
 ```
 
 ---
