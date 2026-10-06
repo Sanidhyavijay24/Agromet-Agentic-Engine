@@ -1,0 +1,17 @@
+﻿version: "3.8"
+
+services:
+  agromet-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agromet_agentic_engine
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - BACKEND_URL=http://127.0.0.1:8000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - LLM_MODEL_NAME=gemini-flash-lite-latest
+    restart: unless-stopped
