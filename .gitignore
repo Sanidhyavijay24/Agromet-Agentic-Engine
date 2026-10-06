@@ -1,0 +1,117 @@
+# ─────────────────────────────────────────────
+#  Python
+# ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+.eggs/
+.venv/
+venv/
+ENV/
+env/
+.env
+.python-version
+catboost_info/
+experiments/artifacts/
+
+# ─────────────────────────────────────────────
+#  Type checkers / linters
+# ─────────────────────────────────────────────
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.pyre/
+
+# ─────────────────────────────────────────────
+#  Testing & Coverage
+# ─────────────────────────────────────────────
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.coveragerc
+
+# ─────────────────────────────────────────────
+#  Jupyter
+# ─────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ─────────────────────────────────────────────
+#  Next.js / Node
+# ─────────────────────────────────────────────
+node_modules/
+.next/
+out/
+.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ─────────────────────────────────────────────
+#  Data binaries (keep structure, ignore blobs)
+# ─────────────────────────────────────────────
+data/raw/*
+data/processed/*
+!data/raw/test_ingestion_results.json
+!data/raw/jaipur_1yr_training_data.parquet
+data/raw/*.csv
+!data/processed/sample_downscaled_forecast.json
+!data/geojson/.gitkeep
+
+# Geospatial & scientific data formats
+*.nc
+*.h5
+*.hdf5
+*.hdf
+*.tif
+*.tiff
+*.geotiff
+*.shp
+*.shx
+*.dbf
+*.prj
+*.grib
+*.grib2
+*.grb
+*.zarr/
+
+# ─────────────────────────────────────────────
+#  Secrets & environment
+# ─────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# ─────────────────────────────────────────────
+#  OS artefacts
+# ─────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ─────────────────────────────────────────────
+#  IDE
+# ─────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.iml
+
+# ML Model Artifacts (reproducible via scripts/train_all_acz_models.py)
+services/ml_downscaler/artifacts/*.joblib
+services/ml_downscaler/artifacts/zones/*.joblib
