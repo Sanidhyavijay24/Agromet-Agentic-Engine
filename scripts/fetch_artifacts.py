@@ -64,7 +64,7 @@ def place_artifacts(src_dir: Path) -> None:
     for root, _, files in os.walk(src_dir):
         for f in files:
             p = Path(root) / f
-            if f == "residual_model_acz_14.joblib":
+            if f.startswith("residual_model_acz_") and f.endswith(".joblib"):
                 dest = MODEL_DEST / f
                 shutil.copy2(p, dest)
                 print(f"Placed model artifact: {dest.relative_to(ROOT_DIR)}")
