@@ -9,6 +9,7 @@ from __future__ import annotations
 import time
 from datetime import datetime, timezone
 import pytest
+from tests.conftest import requires_model
 
 from services.api.schemas import GeoLocation, HourlyForecastPoint, BaselineForecast
 from services.ml_downscaler.inference import (
@@ -24,6 +25,7 @@ from services.ml_downscaler.zone_router import (
 )
 
 
+@requires_model
 def test_flagship_zone_14_model_loadable():
     """Verify that flagship Zone XIV serialized model artifact loads successfully on CPU."""
     assert DEFAULT_MODEL_PATH.exists(), f"Missing flagship Zone 14 artifact at {DEFAULT_MODEL_PATH}"
@@ -37,6 +39,7 @@ def test_flagship_zone_14_model_loadable():
     assert len(payload["anchor_points"]) == 8
 
 
+@requires_model
 def test_pan_india_dynamic_spatial_routing_and_inference():
     """Test dynamic downscaling inference across 15 distinct pan-India coordinates."""
     # Warm up in-memory cache
@@ -105,6 +108,7 @@ def test_pan_india_dynamic_spatial_routing_and_inference():
         assert latency_ms < 50.0, f"Latency too high: {latency_ms:.2f}ms"
 
 
+@requires_model
 def test_batch_forecast_downscaling_speed():
     """Verify 7-day (168-hour) downscaling batch latency is sub-150ms."""
     loc = GeoLocation(

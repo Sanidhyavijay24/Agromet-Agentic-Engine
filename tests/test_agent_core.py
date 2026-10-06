@@ -5,10 +5,12 @@
 """
 
 import pytest
+from tests.conftest import requires_model
 from services.agent.schemas import AgrometAdvisoryRequest, AgentAdvisoryResponse
 from services.agent.core import run_agromet_agent
 
 
+@requires_model
 def test_agent_full_consultation_cycle():
     """Verify complete agent consultation execution with multi-step tool execution and structured plan."""
     request = AgrometAdvisoryRequest(

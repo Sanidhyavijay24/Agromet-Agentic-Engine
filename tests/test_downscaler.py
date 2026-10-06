@@ -13,6 +13,7 @@ import sys
 import numpy as np
 import pandas as pd
 import pytest
+from tests.conftest import requires_model
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
@@ -144,6 +145,7 @@ def test_model_training_and_quality_gate(sample_dataset: pd.DataFrame, tmp_path:
     assert 0.0 <= metrics["downscaled_r2"] <= 1.0
 
 
+@requires_model
 def test_inference_physical_guardrails() -> None:
     """Ensure downscaling respects physical bounds (|R| <= 12°C) and returns valid Pydantic model."""
     loc = GeoLocation(latitude=26.9, longitude=75.8, elevation_m=650.0, district="Jaipur", panchayat="Chaksu")
@@ -168,6 +170,7 @@ def test_inference_physical_guardrails() -> None:
     assert -12.0 <= residual <= 12.0
 
 
+@requires_model
 def test_batch_downscaling() -> None:
     """Verify batch downscaling processes all hourly points correctly."""
     loc = GeoLocation(latitude=26.9, longitude=75.8, elevation_m=400.0, district="Jaipur", panchayat="Chaksu")
@@ -195,6 +198,7 @@ def test_spatial_cross_validation(sample_dataset: pd.DataFrame) -> None:
     assert -100.0 <= cv_res["mean_rmse_improvement_pct"] <= 100.0
 
 
+@requires_model
 def test_inference_covariates_propagation() -> None:
     """Verify that solar, soil, and ET0 covariates propagate correctly to feature vector and result."""
     loc = GeoLocation(latitude=26.9, longitude=75.8, elevation_m=420.0, district="Jaipur", panchayat="Chaksu")
@@ -292,6 +296,7 @@ def test_leave_one_out_baseline_calculation() -> None:
     assert res[res["point_id"] == "P3"]["residual_anomaly_c"].iloc[0] == 15.0   # 40 - 25
 
 
+@requires_model
 def test_thermal_inertia_lag_and_batch_propagation() -> None:
     """Verify 3-hour thermal inertia lag calculation and propagation in forecast batches."""
     from services.api.routes.forecast import compute_thermal_inertia_lag

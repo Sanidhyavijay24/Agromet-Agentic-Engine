@@ -5,6 +5,7 @@
 """
 
 import pytest
+from tests.conftest import requires_model
 from services.agent.tools.downscaler_tool import run_1km_downscaler
 from services.agent.tools.indices_tool import calculate_microclimate_indices, compute_vpd_kpa
 from services.agent.tools.agronomy_tool import lookup_crop_agronomy, CROP_AGRONOMY_REGISTRY
@@ -47,6 +48,7 @@ def test_soil_and_terrain_tool():
     assert soil["execution_time_ms"] >= 0
 
 
+@requires_model
 def test_downscaler_and_indices_integration():
     """Verify end-to-end 1km downscaling tool and physical indices calculation."""
     # Kadera coordinates

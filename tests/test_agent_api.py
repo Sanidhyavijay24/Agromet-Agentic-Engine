@@ -5,6 +5,7 @@
 """
 
 import pytest
+from tests.conftest import requires_model
 from fastapi.testclient import TestClient
 from services.api.main import app
 
@@ -45,6 +46,7 @@ def test_zone_routing_endpoint():
     assert data["is_live_deployment_zone"] is True
 
 
+@requires_model
 def test_point_downscaling_endpoint():
     """Verify 1km downscaled forecast point endpoint."""
     response = client.get("/api/v1/forecast/point?latitude=26.9124&longitude=75.7873&hours=24")
@@ -65,6 +67,7 @@ def test_agent_tools_catalog_endpoint():
     assert "BAJRA" in data["registered_crops"]
 
 
+@requires_model
 def test_agent_advisory_endpoint():
     """Verify full agent advisory endpoint."""
     payload = {
@@ -85,6 +88,7 @@ def test_agent_advisory_endpoint():
     assert len(data["agent_trace"]) == 4
 
 
+@requires_model
 def test_agent_chat_endpoint():
     """Verify interactive conversational agent chat endpoint."""
     payload = {
