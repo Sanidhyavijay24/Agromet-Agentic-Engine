@@ -1,6 +1,6 @@
 # Experiment 11: Unseen 2025 Future Year Temporal & Spatio-Temporal Holdout Benchmark
 
-## 1. Executive Summary & Verification Objective
+## 1. Objective & Holdout Design
 - **Objective:** Evaluate the active 10-year champion downscaler (`residual_model.joblib`, trained strictly on 2015-2024) on **100% unseen 2025 climate data** across all 36 spatial points in Jaipur / Chaksu.
 - **Production Generalization Value:**
   - Standard ML models often overfit to multi-year climate cycles.
@@ -26,4 +26,4 @@
 ---
 
 ## 4. Conclusion
-- The physics-guided residual downscaler maintained a solid **+39.6% error reduction** on completely unseen future-year data, proving high operational stability and zero temporal decay.
+- The physics-guided residual downscaler maintained a solid **+39.6% error reduction** on completely unseen future-year data, proving high operational stability and consistent error reduction across the 2025 evaluation period.

@@ -1,6 +1,6 @@
-# Experiment 13: Independent Quality and Mathematical Metrics Audit
+# Experiment 13: Internal Technical & Metrics Audit
 
-## 1. Executive Summary & Audit Purpose
+## 1. Audit Scope & Verification Objective
 - **Audit Scope:** Comprehensive mathematical and methodological verification of the downscaling pipeline: training data provenance, feature pipeline leak-free status, train/serve parity, baseline metric definitions, and reported model metrics.
 - **Standard Applied:** Strict empirical reproducible verification. All claims must be reproducible via automated test suites.
 
@@ -24,6 +24,11 @@
 
 ---
 
+
+### Finding 4: Scope of Data Leakage Verification
+- **What is covered:** Automated tests (`tests/test_no_target_leakage.py`) confirm that features (`vapor_pressure_deficit_kpa`, `theoretical_lapse_delta_c`, etc.) are computed strictly from coarse/baseline variables and elevation differences, never from local target observations (`local_temperature_c`), and that rolling windows use past timestamps only.
+- **What is not covered:** The tests do not eliminate spatial auto-correlation inherent in reanalysis grids, nor do they replace validation against physical in-situ weather station networks.
+
 ## 3. Metric Calibration Reference Table
 
 | Environment / Zone | Baseline RMSE | ML Model RMSE | Verified RMSE Drop | Validated Status |
@@ -34,5 +39,5 @@
 ---
 
 ## 4. Audit Verdict
-- All data leakage vectors are completely eliminated.
+- Data leakage vectors in the feature pipeline were audited and addressed.
 - The dual-metric representation (+40.2% Zone XIV / +60.6% Pan-India Macro) reflects genuine physical terrain dynamics and rigorous empirical integrity.
