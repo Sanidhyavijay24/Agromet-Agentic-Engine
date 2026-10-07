@@ -17,7 +17,7 @@
 - **ML & Physics Downscaler:** Python 3.11/3.14, FastAPI, Pydantic v2, XGBoost, Scikit-learn, Joblib, NumPy, Pandas.
 - **Data & Rasters:** USGS 30m SRTM DEM (`.hgt`), Horn's slope, aspect azimuth, multi-scale Topographic Position Index (TPI), solar GHI, soil moisture telemetry.
 - **Autonomous Agent:** ReAct engine powered by **Google Gemini Flash** (`gemini-flash-lite-latest` / `gemini-3.7-flash`) with structured Pydantic v2 schemas and deterministic fallback synthesis.
-- **Frontend Stack:** **Pure Bun 1.3.12 + React 19 + TypeScript + Lucide** (sub-50ms bundle build time, Swiss Brutalist Coffee & Sand design tokens, zero Vite/npm dependencies).
+- **Frontend Stack:** **Pure Bun 1.3.12 + React 19 + TypeScript + Lucide** (sub-50ms bundle build time, outdoor-legible agrometeorological palette, Newsreader/IBM Plex typography, zero Vite/npm dependencies).
 - **Containerization:** Multi-stage Dockerfile (<350MB) + `docker-compose.yml` for 1-command deployment.
 
 ---
@@ -98,7 +98,7 @@ agromet-agentic-engine/
 - [x] **Pan-India Kaggle Hub Publishing:** 47.3M 10-year dataset and 15 models published to Kaggle.
 - [x] **ReAct Agromet Agent:** Multi-step autonomous tool-calling with bilingual English/Hindi structured advisories.
 - [x] **FastAPI REST API:** Full endpoints (`/api/v1/forecast`, `/api/v1/advisory`, `/health`) with rate limiting and input validation.
-- [x] **Bun Frontend Dashboard:** Swiss Brutalist interface with real-time psychrometric charts, farm coordinate selection, and agent trace rendering.
+- [x] **Frontend Redesign (Phase 1 Complete):** Outdoor-legible palette (forest green, warm paper off-white, sage, amber, tabular numerals), Newsreader/IBM Plex/Devanagari typography, clean single-narrative page shell.
 - [x] **Quality & Documentation Integrity:** All 16 experiment markdown files fully sanitized, free of legacy terms, and calibrated to empirical metrics.
 - [x] **Automated Testing:** 69 backend tests passing (0 failures), 2 frontend bun tests passing.
 
