@@ -1,9 +1,68 @@
 /**
  * @file index.css
- * @description Clean baseline stylesheet
- * @module frontend
+ * @description Retro-Technical Blueprint & Agrometeorological Drafting Design System
+ * @module frontend/styles
  */
 
+:root {
+  /* Blueprint Color Space */
+  --c-blueprint-bg: #0968C8;
+  --c-blueprint-dark: #06498F;
+  --c-blueprint-surface: #0E75DF;
+  --c-blueprint-border: rgba(255, 255, 255, 0.24);
+  --c-blueprint-border-strong: rgba(255, 255, 255, 0.45);
+  --c-blueprint-text: #FFFFFF;
+  --c-blueprint-subtext: #D6EAFF;
+  --c-blueprint-muted: #8EBEF0;
+
+  /* Drafting Paper Color Space (The Warm Sheet) */
+  --c-paper-bg: #F3ECE2;
+  --c-paper-sheet: #FAF6EE;
+  --c-paper-card: #FFFFFF;
+  --c-paper-border: #D7CEBE;
+  --c-paper-border-strong: #BAAE9B;
+  --c-paper-grid-line: rgba(188, 175, 155, 0.28);
+
+  /* Drafting Ink on Paper */
+  --c-ink-heading: #121C24;
+  --c-ink-body: #23313B;
+  --c-ink-secondary: #4E5E69;
+  --c-ink-muted: #7A8994;
+
+  /* Physical Curve & Agromet Accents */
+  --c-curve-coarse: #8292A0;
+  --c-curve-ml: #E06314;
+  --c-curve-ml-glow: rgba(224, 99, 20, 0.22);
+  --c-accent-safe: #19814E;
+  --c-accent-safe-bg: #E8F5EE;
+  --c-accent-warn: #D97706;
+  --c-accent-warn-bg: #FEF3C7;
+  --c-accent-danger: #C93424;
+  --c-accent-danger-bg: #FEECEB;
+
+  /* Typography */
+  --font-display: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-hindi: "Noto Sans Devanagari", "IBM Plex Sans", sans-serif;
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Drafting Radii & Shadows */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --shadow-paper: 0 10px 30px -5px rgba(6, 40, 75, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 3px rgba(18, 28, 36, 0.06), 0 1px 2px rgba(18, 28, 36, 0.04);
+}
+
+/* Global Reset */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -11,8 +70,377 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #fafaf8;
-  color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--c-blueprint-bg);
+  color: var(--c-blueprint-text);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Blueprint Grid Texture for Main Canvas */
+.blueprint-canvas {
+  min-height: 100vh;
+  background-color: var(--c-blueprint-bg);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Spatial Ruler Margin (Left-Edge Architectural Scale) */
+.spatial-ruler {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  background: rgba(6, 73, 143, 0.92);
+  border-right: 1px solid var(--c-blueprint-border-strong);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--c-blueprint-subtext);
+}
+
+.ruler-tick-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 0;
+}
+
+.ruler-mark {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+  position: relative;
+}
+
+.ruler-mark::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.ruler-mark.major::after {
+  width: 14px;
+  background: #FFFFFF;
+}
+
+.ruler-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transform: rotate(-90deg);
+  transform-origin: right center;
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+/* Main Studio Container (Offset by ruler) */
+.studio-layout {
+  margin-left: 44px;
+  padding: 0 32px 64px 32px;
+  max-width: 1440px;
+}
+
+/* Poster Header & Display Typography */
+.blueprint-header {
+  padding: 40px 0 28px 0;
+  border-bottom: 1px solid var(--c-blueprint-border);
+}
+
+.poster-title-band {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.poster-display-heading {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5.5vw, 68px);
+  font-weight: 850;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--c-paper-sheet);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(6, 40, 75, 0.35);
+}
+
+.poster-display-heading span {
+  color: #FFFFFF;
+  display: block;
+}
+
+.poster-subtitle {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--c-blueprint-subtext);
+  max-width: 680px;
+  margin: 14px 0 0 0;
+}
+
+/* Technical Telemetry Badges */
+.telemetry-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(6, 73, 143, 0.75);
+  border: 1px solid var(--c-blueprint-border-strong);
+  padding: 5px 12px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.telemetry-pill.live-indicator::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+}
+
+/* Drafting Paper Sheet (The Contrast Overlay) */
+.paper-sheet {
+  background-color: var(--c-paper-bg);
+  background-image:
+    linear-gradient(to right, var(--c-paper-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--c-paper-grid-line) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: var(--c-ink-body);
+  border: 1px solid var(--c-paper-border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-paper);
+  margin-top: 36px;
+  padding: 32px;
+  position: relative;
+}
+
+/* Registration Crosshair Corner Marks */
+.paper-sheet::before,
+.paper-sheet::after {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--c-ink-muted);
+  position: absolute;
+  line-height: 1;
+}
+
+.paper-sheet::before {
+  content: "+";
+  top: 8px;
+  left: 8px;
+}
+
+.paper-sheet::after {
+  content: "+";
+  top: 8px;
+  right: 8px;
+}
+
+/* Sheet Section Header */
+.sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--c-ink-heading);
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sheet-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--c-curve-ml);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.sheet-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--c-ink-heading);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.sheet-caption {
+  font-size: 13.5px;
+  color: var(--c-ink-secondary);
+  max-width: 520px;
+}
+
+/* Cards & Modules on Paper */
+.draft-card {
+  background: var(--c-paper-card);
+  border: 1px solid var(--c-paper-border);
+  border-radius: var(--radius-xs);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.draft-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 1px dashed var(--c-paper-border);
+  padding-bottom: 10px;
+}
+
+.draft-card-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--c-ink-heading);
+}
+
+/* Tabular Numerals & Metric Readouts */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-family: var(--font-mono);
+}
+
+.metric-big {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--c-ink-heading);
+}
+
+.metric-unit {
+  font-size: 12px;
+  color: var(--c-ink-muted);
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+/* Buttons & Interactive Elements */
+.btn-blueprint {
+  background: var(--c-blueprint-bg);
+  color: #FFFFFF;
+  border: 1px solid var(--c-blueprint-border-strong);
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-blueprint:hover {
+  background: var(--c-blueprint-dark);
+}
+
+.btn-paper {
+  background: var(--c-paper-sheet);
+  color: var(--c-ink-heading);
+  border: 1px solid var(--c-paper-border-strong);
+  padding: 7px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-paper:hover {
+  background: #FFFFFF;
+  border-color: var(--c-ink-heading);
+}
+
+.btn-paper.active {
+  background: var(--c-ink-heading);
+  color: var(--c-paper-sheet);
+  border-color: var(--c-ink-heading);
+}
+
+/* Tag Badges */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-tag.safe {
+  background: var(--c-accent-safe-bg);
+  color: var(--c-accent-safe);
+  border: 1px solid rgba(25, 129, 78, 0.25);
+}
+
+.badge-tag.warn {
+  background: var(--c-accent-warn-bg);
+  color: var(--c-accent-warn);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+}
+
+.badge-tag.danger {
+  background: var(--c-accent-danger-bg);
+  color: var(--c-accent-danger);
+  border: 1px solid rgba(201, 52, 36, 0.25);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  .studio-layout {
+    margin-left: 0;
+    padding: 0 16px 48px 16px;
+  }
+  .spatial-ruler {
+    display: none;
+  }
+  .paper-sheet {
+    padding: 20px 16px;
+    margin-top: 24px;
+  }
 }
